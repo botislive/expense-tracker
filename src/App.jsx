@@ -1,13 +1,12 @@
-import './App.css'
-import Input from './components/Input'
+import './index.css'
+import { Provider } from 'jotai'
+import Dashboard from './components/Dashboard'
 
 function App() {
-
   return (
-    <>
-          <Input />
-
-    </>
+    <Provider>
+      <Dashboard />
+    </Provider>
   )
 }
 
