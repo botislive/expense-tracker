@@ -1,11 +1,12 @@
 import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 import { nanoid } from "nanoid";
 
-export const themeAtom = atom("dark");
+export const themeAtom = atomWithStorage("trackit-theme", "dark");
 
-export const expensesAtom = atom([])
+export const expensesAtom = atomWithStorage("trackit-expenses", [])
 
-export const filtermodeAtom = atom("all")
+export const filtermodeAtom = atomWithStorage("trackit-filter-mode", "all")
 
 export const addnewExpenseAtom = atom(null, (get, set, { amount, category }) => {
     const newExpense = {
