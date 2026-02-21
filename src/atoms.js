@@ -74,3 +74,39 @@ export const changePendingAtom = atom(null,(get,set,id)=>{
     set(expensesAtom,updatedExpenses)
 
 })
+
+export const expensesbyyearmonthdayAtom = atom(null)
+export const expensesbyyearmonthAtom = atom()
+export const expensesbyyearAtom = atom()
+
+export const filterbyyearmonthdayAtom = atom(null,(get,set,{year,month,day})=>{
+       const expenses=get(expensesAtom)
+       const filteredExpenses=expenses.filter((expense)=>{
+        return expense.year===year && expense.month===month && expense.day===day
+       })
+       set(expensesbyyearmonthdayAtom,filteredExpenses)
+})
+
+
+export const filterbyyearmonthAtom = atom(null,(get,set,{year,month})=>{
+    const expenses=get(expensesAtom)
+    const newexpenses= expenses.map((expense)=>{
+        if(expense.year===year && expense.month===month ){
+            return expense
+        }
+        return expense
+    })
+    set(expensesbyyearmonthAtom,newexpenses)
+})
+
+
+export const filterbyyearAtom = atom(null,(get,set,{year})=>{
+    const expenses=get(expensesAtom)
+    const newexpenses= expenses.map((expense)=>{
+        if(expense.year===year){
+            return expense
+        }
+        return expense
+    })
+    set(expensesbyyearAtom,newexpenses)
+})

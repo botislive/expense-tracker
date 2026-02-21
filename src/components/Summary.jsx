@@ -1,5 +1,7 @@
 import { useAtom } from "jotai"
 import { sumofExpensesAtom,sumofPendingExpensesAtom,filtermodeAtom } from "../atoms"
+import Calendar from "./Calendar"
+import DetailedSummary from "./DetailedSummary"
 
 function Summary() {
     const[sumofExpenses]=useAtom(sumofExpensesAtom)
@@ -15,7 +17,18 @@ function Summary() {
         </div>
             <p>Total Expenses: {sumofExpenses}</p>
             <p>Total Pending Expenses: {sumofPendingExpenses}</p>
-        </div>}
+             
+             <div>
+                <Calendar/>
+             </div>
+
+             <div>
+                <DetailedSummary/>
+             </div>
+
+        </div>
+          
+        }
     </div>
   )
 }
