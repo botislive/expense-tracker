@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { addnewExpenseAtom, expensesAtom } from "../atoms"
+import { addnewExpenseAtom, expensesAtom,filtermodeAtom } from "../atoms"
 import { useAtom } from "jotai"
 import ShowExpenses from "./ShowExpenses"
 
@@ -9,6 +9,8 @@ function Input() {
 
   const [, addNewExpense] = useAtom(addnewExpenseAtom)
   const [expenses] = useAtom(expensesAtom)
+  const [,setfiltermode]=useAtom(filtermodeAtom)
+
 
   const handleButton = () => {
     if (!amount) return
@@ -38,11 +40,22 @@ function Input() {
           <option value="finance">Finance</option>
           <option value="education">Education</option>
         </select>
-      </div>
+      </div><br />
 
       <button onClick={handleButton}>
         Add Expense
-      </button>
+      </button><br /><br />
+       {expenses.length > 0 && <div>
+                    <div>
+                      <button onClick={()=>setfiltermode("all")}>All</button>
+                      <button onClick={()=>setfiltermode("pending")}>Pending</button>
+                      <button onClick={()=>setfiltermode("paid")}>Paid</button>
+                      <button onClick={()=>setfiltermode("tech")}>Technology</button>
+                      <button onClick={()=>setfiltermode("lifestyle")}>Lifestyle</button>
+                      <button onClick={()=>setfiltermode("finance")}>Finance</button>
+                      <button onClick={()=>setfiltermode("education")}>Education</button>
+                    </div>
+                               </div>}
 
       {expenses.length > 0 && <ShowExpenses />}
     </div>
