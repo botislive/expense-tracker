@@ -12,7 +12,10 @@ export const addnewExpenseAtom = atom(null,(get,set,{amount,category})=>{
             amount,
             category,
             pending:true,
-            date:new Date()
+            date:new Date(),
+            day:new Date().getDate(),
+            month:new Date().getMonth(),
+            year:new Date().getFullYear(),
          }
          const currentExpenses=get(expensesAtom)
          set(expensesAtom,[newExpense,...currentExpenses])
@@ -47,4 +50,27 @@ export const filteredexpensesAtom = atom((get)=>{
             return expenses
 
     }
+})
+
+export const sumofExpensesAtom = atom((get)=>{
+    const expenses=get(expensesAtom)
+    return expenses.reduce((acc,expense)=>acc+expense.amount,0)
+})
+
+export const sumofPendingExpensesAtom = atom((get)=>{
+    const expenses=get(expensesAtom)
+    return expenses.filter((expense)=>expense.pending).reduce((acc,expense)=>acc+expense.amount,0)
+})
+
+
+export const changePendingAtom = atom(null,(get,set,id)=>{
+    const currentExpenses=get(expensesAtom)
+    const updatedExpenses=currentExpenses.map((expense)=>{
+        if(expense.id===id){
+            return {...expense,pending:!expense.pending}
+        }
+        return expense
+    })
+    set(expensesAtom,updatedExpenses)
+
 })
